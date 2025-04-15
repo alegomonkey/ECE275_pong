@@ -1,0 +1,19 @@
+set_location_assignment PIN_L21 -to VGA_HS[0]
+set_location_assignment PIN_L22 -to VGA_VS[0]
+set_location_assignment PIN_K22 -to VGA_B[0]
+set_location_assignment PIN_K21 -to VGA_B[1]
+set_location_assignment PIN_J22 -to VGA_B[2]
+set_location_assignment PIN_K18 -to VGA_B[3]
+set_location_assignment PIN_H22 -to VGA_G[0]
+set_location_assignment PIN_J17 -to VGA_G[1]
+set_location_assignment PIN_K17 -to VGA_G[2]
+set_location_assignment PIN_J21 -to VGA_G[3]
+set_location_assignment PIN_H19 -to VGA_R[0]
+set_location_assignment PIN_H17 -to VGA_R[1]
+set_location_assignment PIN_H20 -to VGA_R[2]
+set_location_assignment PIN_H21 -to VGA_R[3]
+set_location_assignment PIN_G21 -to CLOCK_50
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name QIP_FILE PLL_PIXEL_CLK.qip
