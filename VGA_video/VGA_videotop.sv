@@ -29,7 +29,7 @@ reg			[11:0]		pixel_color;	//12 Bits representing color of pixel, 4 bits for R, 
 										//4 bits for Blue are in most significant position, Red in least
 				
 //Draw player 1 paddle
-wire [9:0] player_1_paddle_width=10;
+wire [9:0] player_1_paddle_width=5;
 wire [9:0] player_1_paddle_height=50;
 wire [9:0] player_1_paddle_X_location=0;
 wire [9:0] player_1_paddle_Y_location=SW[7:0];
@@ -48,10 +48,10 @@ make_box draw_player_1_paddle(
 //Draw ball
 wire [9:0] ball_width=4;
 wire [9:0] ball_height=4;
-wire [9:0] ball_X_location=250;
-wire [9:0] ball_Y_location=250;
+reg [9:0] ball_X_location=0;
+reg [9:0] ball_Y_location=0;
 reg b_direction = 1;
-reg ball;				
+reg ball;
 make_box draw_ball(
 	.X_pix(X_pix),
 	.Y_pix(Y_pix),
@@ -63,11 +63,35 @@ make_box draw_ball(
 	.box(ball)
 );
 
+reg [19:0] ball_speed_counter = 0;  // Adjust bit-width as needed
+//reg pixel_cycle = ;
 always @(posedge pixel_clk)
 	begin
-		if(player_1_paddle) pixel_color <= 12'b0000_0000_1111;
+		
+		ball_speed_counter <= ball_speed_counter + 1;
+		
+		if (ball_speed_counter == 500_000) begin
+			ball_speed_counter <= 0;
+			if (b_direction == 1 && ball_X_location > 5)
+				ball_X_location = ball_X_location - 1;
+			
+			else if (ball_X_location <= 5) begin
+				b_direction = 2;
+				ball_X_location = ball_X_location + 1;
+				end
+			
+			else if (ball_X_location == 640) begin
+				b_direction = 1;
+				ball_X_location = ball_X_location - 1;
+				end
+			
+			else
+				ball_X_location = ball_X_location + 1;
+		end
+		
+		if(player_1_paddle) pixel_color <= 12'b0000_1111_0000;
+		else if(ball) pixel_color <= 12'b1111_1111_1111;
 		else pixel_color <= 12'b0000_0000_0000;
-		if(ball) pixel_color <= 12'b1111_1111_1111;
 	end
 	
 		//Pass pins and current pixel values to display driver
