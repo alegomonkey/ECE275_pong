@@ -2,6 +2,7 @@
 `include "./modules/make_box.v"
 
 // NAMES: JOHNNY SYLVAIN, OZWIN CORDES, COLE ADAMS
+// Screen Size 640x480
 module VGA_videotop(CLOCK_50, 
                 VGA_R, VGA_G, VGA_B, VGA_HS, VGA_VS, SW);
 
@@ -28,8 +29,8 @@ reg			[11:0]		pixel_color;	//12 Bits representing color of pixel, 4 bits for R, 
 										//4 bits for Blue are in most significant position, Red in least
 				
 //Draw player 1 paddle
-wire [9:0] player_1_paddle_width=20;
-wire [9:0] player_1_paddle_height=80;
+wire [9:0] player_1_paddle_width=10;
+wire [9:0] player_1_paddle_height=50;
 wire [9:0] player_1_paddle_X_location=0;
 wire [9:0] player_1_paddle_Y_location=SW[7:0];
 reg player_1_paddle;				
@@ -43,10 +44,35 @@ make_box draw_player_1_paddle(
 	.pixel_clk(pixel_clk),
 	.box(player_1_paddle)
 );	
+
+//Draw ball
+wire [9:0] ball_width=4;
+wire [9:0] ball_height=4;
+wire [9:0] ball_X_location=500;
+wire [9:0] ball_Y_location=500;
+reg b_direction = 1;
+reg ball;				
+make_box draw_ball(
+	.X_pix(X_pix),
+	.Y_pix(Y_pix),
+	.box_width(ball_width),
+	.box_height(ball_height),
+	.box_X_location(ball_X_location),
+	.box_Y_location(ball_Y_location),
+	.pixel_clk(pixel_clk),
+	.box(ball)
+);
+
+reg pixel_cycle = ;
 always @(posedge pixel_clk)
 	begin
 		if(player_1_paddle) pixel_color <= 12'b0000_0000_1111;
 		else pixel_color <= 12'b0000_0000_0000;
+		// if for edges
+		// if for every direction
+		if (b_direction == 1)
+			ball_X_location = ball_X_location - 1;
+		if(ball) pixel_color <= 12'b1111_1111_1111;
 	end
 	
 		//Pass pins and current pixel values to display driver
