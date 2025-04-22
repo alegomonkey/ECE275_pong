@@ -16,7 +16,11 @@
 -- PROGRAM "Quartus II 64-Bit"
 -- VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Web Edition"
 
+<<<<<<< Updated upstream
 -- DATE "04/22/2025 15:08:33"
+=======
+-- DATE "04/22/2025 15:09:35"
+>>>>>>> Stashed changes
 
 -- 
 -- Device: Altera EP3C16F484C6 Package FBGA484
@@ -254,6 +258,7 @@ SIGNAL \VGA_Driver|Selector0~2_combout\ : std_logic;
 SIGNAL \VGA_Driver|Selector0~3_combout\ : std_logic;
 SIGNAL \VGA_Driver|Selector6~0_combout\ : std_logic;
 SIGNAL \VGA_Driver|Selector6~1_combout\ : std_logic;
+<<<<<<< Updated upstream
 SIGNAL \VGA_Driver|H_visible\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \VGA_Driver|VGA_VS\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \VGA_Driver|pll_inst0|altpll_component|auto_generated|wire_pll1_clk\ : std_logic_vector(4 DOWNTO 0);
@@ -265,6 +270,19 @@ SIGNAL \VGA_Driver|VS_counter\ : std_logic_vector(10 DOWNTO 0);
 SIGNAL \VGA_Driver|VGA_BUS_G\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \VGA_Driver|V_visible\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \VGA_Driver|HS_counter\ : std_logic_vector(10 DOWNTO 0);
+=======
+SIGNAL \VGA_Driver|pll_inst0|altpll_component|auto_generated|wire_pll1_clk\ : std_logic_vector(4 DOWNTO 0);
+SIGNAL \VGA_Driver|V_visible\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_BUS_B\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|H_visible\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_HS\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_BUS_G\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|VS_counter\ : std_logic_vector(10 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_BUS_R\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_VS\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL \VGA_Driver|HS_counter\ : std_logic_vector(10 DOWNTO 0);
+SIGNAL pixel_color : std_logic_vector(11 DOWNTO 0);
+>>>>>>> Stashed changes
 SIGNAL \VGA_Driver|ALT_INV_VGA_VS\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \VGA_Driver|ALT_INV_VGA_HS\ : std_logic_vector(0 DOWNTO 0);
 

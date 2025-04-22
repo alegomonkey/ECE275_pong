@@ -1,4 +1,8 @@
 /VGA_video/db/
 /VGA_video/incremental_db/
 /VGA_video/output_files/
+<<<<<<< Updated upstream
 /VGA_video/simulation/modelsim/
+=======
+/VGA_video/simulation/modelsim/
+>>>>>>> Stashed changes
