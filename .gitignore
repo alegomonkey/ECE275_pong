@@ -1,5 +1,5 @@
-/VGA_video/db/
-/VGA_video/incremental_db/
-/VGA_video/output_files/
-/VGA_video/simulation/modelsim/
+db/
+incremental_db/
+output_files/
+simulation/modelsim/
 
