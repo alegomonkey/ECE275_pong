@@ -16,7 +16,7 @@
 -- PROGRAM "Quartus II 64-Bit"
 -- VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Web Edition"
 
--- DATE "04/22/2025 15:06:23"
+-- DATE "04/22/2025 15:08:33"
 
 -- 
 -- Device: Altera EP3C16F484C6 Package FBGA484
@@ -36,11 +36,11 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY 	VGA_videotop IS
     PORT (
 	CLOCK_50 : IN std_logic;
-	VGA_R : BUFFER std_logic_vector(3 DOWNTO 0);
-	VGA_G : BUFFER std_logic_vector(3 DOWNTO 0);
-	VGA_B : BUFFER std_logic_vector(3 DOWNTO 0);
-	VGA_HS : BUFFER std_logic_vector(0 DOWNTO 0);
-	VGA_VS : BUFFER std_logic_vector(0 DOWNTO 0);
+	VGA_R : OUT std_logic_vector(3 DOWNTO 0);
+	VGA_G : OUT std_logic_vector(3 DOWNTO 0);
+	VGA_B : OUT std_logic_vector(3 DOWNTO 0);
+	VGA_HS : OUT std_logic_vector(0 DOWNTO 0);
+	VGA_VS : OUT std_logic_vector(0 DOWNTO 0);
 	SW : IN std_logic_vector(7 DOWNTO 0)
 	);
 END VGA_videotop;
@@ -254,17 +254,17 @@ SIGNAL \VGA_Driver|Selector0~2_combout\ : std_logic;
 SIGNAL \VGA_Driver|Selector0~3_combout\ : std_logic;
 SIGNAL \VGA_Driver|Selector6~0_combout\ : std_logic;
 SIGNAL \VGA_Driver|Selector6~1_combout\ : std_logic;
-SIGNAL \VGA_Driver|VGA_BUS_R\ : std_logic_vector(3 DOWNTO 0);
-SIGNAL \VGA_Driver|VS_counter\ : std_logic_vector(10 DOWNTO 0);
 SIGNAL \VGA_Driver|H_visible\ : std_logic_vector(0 DOWNTO 0);
-SIGNAL \VGA_Driver|V_visible\ : std_logic_vector(0 DOWNTO 0);
-SIGNAL pixel_color : std_logic_vector(11 DOWNTO 0);
-SIGNAL \VGA_Driver|VGA_HS\ : std_logic_vector(0 DOWNTO 0);
-SIGNAL \VGA_Driver|pll_inst0|altpll_component|auto_generated|wire_pll1_clk\ : std_logic_vector(4 DOWNTO 0);
 SIGNAL \VGA_Driver|VGA_VS\ : std_logic_vector(0 DOWNTO 0);
-SIGNAL \VGA_Driver|HS_counter\ : std_logic_vector(10 DOWNTO 0);
-SIGNAL \VGA_Driver|VGA_BUS_G\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|pll_inst0|altpll_component|auto_generated|wire_pll1_clk\ : std_logic_vector(4 DOWNTO 0);
+SIGNAL pixel_color : std_logic_vector(11 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_BUS_R\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_HS\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \VGA_Driver|VGA_BUS_B\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|VS_counter\ : std_logic_vector(10 DOWNTO 0);
+SIGNAL \VGA_Driver|VGA_BUS_G\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \VGA_Driver|V_visible\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL \VGA_Driver|HS_counter\ : std_logic_vector(10 DOWNTO 0);
 SIGNAL \VGA_Driver|ALT_INV_VGA_VS\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \VGA_Driver|ALT_INV_VGA_HS\ : std_logic_vector(0 DOWNTO 0);
 

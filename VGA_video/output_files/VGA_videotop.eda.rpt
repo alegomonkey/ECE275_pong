@@ -1,5 +1,5 @@
 EDA Netlist Writer report for VGA_videotop
-Tue Apr 22 15:06:24 2025
+Tue Apr 22 15:08:33 2025
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Tue Apr 22 15:06:24 2025 ;
+; EDA Netlist Writer Status ; Successful - Tue Apr 22 15:08:33 2025 ;
 ; Revision Name             ; VGA_videotop                          ;
 ; Top-level Entity Name     ; VGA_videotop                          ;
 ; Family                    ; Cyclone III                           ;
@@ -88,7 +88,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit EDA Netlist Writer
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Tue Apr 22 15:06:23 2025
+    Info: Processing started: Tue Apr 22 15:08:32 2025
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off VGA_video -c VGA_videotop
 Info (204019): Generated file VGA_videotop_6_1200mv_85c_slow.vho in folder "C:/Users/alego/OneDrive/Desktop/Git-Repo/ECE275_pong/VGA_video/simulation/modelsim/" for EDA simulation tool
 Info (204019): Generated file VGA_videotop_6_1200mv_0c_slow.vho in folder "C:/Users/alego/OneDrive/Desktop/Git-Repo/ECE275_pong/VGA_video/simulation/modelsim/" for EDA simulation tool
@@ -99,8 +99,8 @@ Info (204019): Generated file VGA_videotop_6_1200mv_0c_vhd_slow.sdo in folder "C
 Info (204019): Generated file VGA_videotop_min_1200mv_0c_vhd_fast.sdo in folder "C:/Users/alego/OneDrive/Desktop/Git-Repo/ECE275_pong/VGA_video/simulation/modelsim/" for EDA simulation tool
 Info (204019): Generated file VGA_videotop_vhd.sdo in folder "C:/Users/alego/OneDrive/Desktop/Git-Repo/ECE275_pong/VGA_video/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4544 megabytes
-    Info: Processing ended: Tue Apr 22 15:06:24 2025
+    Info: Peak virtual memory: 4548 megabytes
+    Info: Processing ended: Tue Apr 22 15:08:33 2025
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
