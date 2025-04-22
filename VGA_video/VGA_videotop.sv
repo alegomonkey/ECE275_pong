@@ -48,8 +48,8 @@ make_box draw_player_1_paddle(
 //Draw ball
 wire [9:0] ball_width=4;
 wire [9:0] ball_height=4;
-wire [9:0] ball_X_location=500;
-wire [9:0] ball_Y_location=500;
+wire [9:0] ball_X_location=250;
+wire [9:0] ball_Y_location=250;
 reg b_direction = 1;
 reg ball;				
 make_box draw_ball(
@@ -63,15 +63,10 @@ make_box draw_ball(
 	.box(ball)
 );
 
-reg pixel_cycle = ;
 always @(posedge pixel_clk)
 	begin
 		if(player_1_paddle) pixel_color <= 12'b0000_0000_1111;
 		else pixel_color <= 12'b0000_0000_0000;
-		// if for edges
-		// if for every direction
-		if (b_direction == 1)
-			ball_X_location = ball_X_location - 1;
 		if(ball) pixel_color <= 12'b1111_1111_1111;
 	end
 	
