@@ -3,11 +3,14 @@
 
 // NAMES: JOHNNY SYLVAIN, OZWIN CORDES, COLE ADAMS
 // Screen Size 640x480
-module VGA_videotop(CLOCK_50, 
-                VGA_R, VGA_G, VGA_B, VGA_HS, VGA_VS, SW);
+module VGA_videotop(
+CLOCK_50, 
+VGA_R, VGA_G, VGA_B, VGA_HS, VGA_VS, 
+SW, ORG_BUTTON);
 
 input	wire			CLOCK_50;
 input [7:0]			SW;
+input [2:1] ORG_BUTTON;
 
 output	wire	[3:0]		VGA_R;		//Output Red
 output	wire	[3:0]		VGA_G;		//Output Green
@@ -32,7 +35,7 @@ reg			[11:0]		pixel_color;	//12 Bits representing color of pixel, 4 bits for R, 
 wire [9:0] player_1_paddle_width=5;
 wire [9:0] player_1_paddle_height=50;
 wire [9:0] player_1_paddle_X_location=0;
-wire [9:0] player_1_paddle_Y_location=SW[7:0];
+reg [8:0] player_1_paddle_Y_location=0;
 reg player_1_paddle;				
 make_box draw_player_1_paddle(
 	.X_pix(X_pix),
@@ -64,13 +67,27 @@ make_box draw_ball(
 );
 
 reg [19:0] ball_speed_counter = 0;  // Adjust bit-width as needed
+reg [19:0] paddle_speed_counter = 0;
 //reg pixel_cycle = ;
 always @(posedge pixel_clk)
 	begin
 		
 		ball_speed_counter <= ball_speed_counter + 1;
+		paddle_speed_counter <= paddle_speed_counter + 1;
 		
-		if (ball_speed_counter == 500_000) begin
+		if (paddle_speed_counter == 100_000) begin
+			paddle_speed_counter <= 0;
+			if (ORG_BUTTON[1]) begin
+				player_1_paddle_Y_location = player_1_paddle_Y_location - 1;
+			end
+			
+			if (ORG_BUTTON[2]) begin
+				player_1_paddle_Y_location = player_1_paddle_Y_location + 1;
+			end
+		end
+		
+		if (ball_speed_counter == 200_000) begin
+		
 			ball_speed_counter <= 0;
 			if (b_direction == 1 && ball_X_location > 5)
 				ball_X_location = ball_X_location - 1;
@@ -88,6 +105,9 @@ always @(posedge pixel_clk)
 			else
 				ball_X_location = ball_X_location + 1;
 		end
+		
+		
+		
 		
 		if(player_1_paddle) pixel_color <= 12'b0000_1111_0000;
 		else if(ball) pixel_color <= 12'b1111_1111_1111;
