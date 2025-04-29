@@ -94,6 +94,7 @@ always @(posedge pixel_clk)
 		ball_speed_counter <= ball_speed_counter + 1;
 		paddle_speed_counter <= paddle_speed_counter + 1;
 		
+<<<<<<< Updated upstream
 		if (paddle_speed_counter == 100_000) begin
 			paddle_speed_counter <= 0;
 			if (ORG_BUTTON[1]) begin
@@ -150,6 +151,44 @@ always @(posedge pixel_clk)
 		
 		if(player_1_paddle) pixel_color <= 12'b0000_1111_0000;
 =======
+		if(player_1_paddle) pixel_color <= 12'b0000_0000_1111;
+		else if(player_2_paddle) pixel_color <= 12'b1111_0000_0000;
+>>>>>>> Stashed changes
+=======
+		if (ball_speed_counter == 250_000) begin
+			ball_speed_counter <= 0;
+			
+			if (ball_X_location-1 == player_1_paddle) begin
+				ball_X_location = ball_X_location + 2;
+				b_velocity_X = -b_velocity_X;
+			end
+			else if (ball_X_location+1 == player_2_paddle) begin
+				ball_X_location = ball_X_location - 2;
+				b_velocity_X = -b_velocity_X;
+			end
+			else if (ball_X_location+1 >= 635)begin
+				ball_X_location = ball_X_location - 5;
+				b_velocity_X = -b_velocity_X;
+			end
+			else if (ball_X_location-1 <= 5)begin
+				ball_X_location = ball_X_location + 5;
+				b_velocity_X = -b_velocity_X;
+			end
+			//Y
+			else if(ball_Y_location-1 <= 5)begin
+				ball_Y_location = ball_Y_location + 5 ;
+				b_velocity_Y = -b_velocity_Y; 
+			end
+			else if(ball_Y_location+1 >= 470)begin
+				ball_Y_location = ball_Y_location - 5;
+				b_velocity_Y = -b_velocity_Y; 
+			end
+			else begin
+				ball_X_location = ball_X_location + b_velocity_X;
+				ball_Y_location = ball_Y_location + b_velocity_Y;
+			end
+		end
+		
 		if(player_1_paddle) pixel_color <= 12'b0000_0000_1111;
 		else if(player_2_paddle) pixel_color <= 12'b1111_0000_0000;
 >>>>>>> Stashed changes
