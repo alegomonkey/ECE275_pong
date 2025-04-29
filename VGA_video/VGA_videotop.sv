@@ -5,11 +5,9 @@
 // Screen Size 640x480
 module VGA_videotop(
 CLOCK_50, 
-VGA_R, VGA_G, VGA_B, VGA_HS, VGA_VS, 
-SW, ORG_BUTTON);
+VGA_R, VGA_G, VGA_B, VGA_HS, VGA_VS, ORG_BUTTON);
 
 input	wire			CLOCK_50;
-input [7:0]			SW;
 input [2:1] ORG_BUTTON;
 
 output	wire	[3:0]		VGA_R;		//Output Red
@@ -52,7 +50,7 @@ make_box draw_player_1_paddle(
 wire [9:0] player_2_paddle_width=5;
 wire [9:0] player_2_paddle_height=50;
 wire [9:0] player_2_paddle_X_location=635;
-wire [9:0] player_2_paddle_Y_location=0;
+reg signed [10:0] player_2_paddle_Y_location=0;
 reg player_2_paddle;				
 make_box draw_player_2_paddle(
 	.X_pix(X_pix),
@@ -68,8 +66,8 @@ make_box draw_player_2_paddle(
 //Draw ball
 wire [9:0] ball_width=4;
 wire [9:0] ball_height=4;
-reg signed [9:0] ball_X_location=600;
-reg signed [9:0] ball_Y_location=20;
+reg signed [10:0] ball_X_location=600;
+reg signed [10:0] ball_Y_location=20;
 reg signed [4:0] b_velocity_X = -1;
 reg signed [4:0] b_velocity_Y = 1;
 reg ball;
@@ -86,12 +84,15 @@ make_box draw_ball(
 
 reg [19:0] ball_speed_counter = 0;  // Adjust bit-width as needed
 reg [19:0] paddle_speed_counter = 0;
-//reg pixel_cycle = ;
+reg [19:0] AI_counter = 0;
+reg score_player = 0;
+reg score_AI = 0;
 always @(posedge pixel_clk)
 	begin
 		
 		ball_speed_counter <= ball_speed_counter + 1;
 		paddle_speed_counter <= paddle_speed_counter + 1;
+		AI_counter <= AI_counter + 1;
 		if (paddle_speed_counter == 100_000) begin
 			paddle_speed_counter <= 0;
 			if (ORG_BUTTON[1]) begin
@@ -102,34 +103,39 @@ always @(posedge pixel_clk)
 				player_1_paddle_Y_location = player_1_paddle_Y_location + 1;
 			end
 		end
-		if (ball_speed_counter == 250_000) begin
+		if (AI_counter == 150_000) begin
+			AI_counter <= 0;
+			player_2_paddle_Y_location = player_2_paddle_Y_location + b_velocity_Y;
+		end 
+		if (ball_speed_counter == 150_000) begin
 			ball_speed_counter <= 0;
-			/*
-			if (ball_X_location-1 == player_1_paddle) begin
+			if (ball_X_location-1 == player_1_paddle_X_location+player_1_paddle_width && (ball_Y_location >= player_1_paddle_Y_location && ball_Y_location < player_1_paddle_Y_location + player_1_paddle_height)) begin
 				ball_X_location = ball_X_location + 2;
 				b_velocity_X = -b_velocity_X;
 			end
-			
-			else if (ball_X_location+1 == player_2_paddle) begin
+			else if (ball_X_location+1 == player_2_paddle_X_location && (ball_Y_location >= player_2_paddle_Y_location && ball_Y_location < player_2_paddle_Y_location + player_2_paddle_height)) begin
 				ball_X_location = ball_X_location - 2;
 				b_velocity_X = -b_velocity_X;
 			end
-			*/
 			// X
-			if (ball_X_location+1 >= 630)begin
-				ball_X_location = ball_X_location - 5;
-				b_velocity_X = -b_velocity_X;
+			else if (ball_X_location+1 >= 640)begin
+				score_AI = score_AI + 1;
+				ball_X_location = 320;
+				ball_Y_location = 240;
+				player_2_paddle_Y_location = 240;
 			end
-			else if (ball_X_location-1 <= 5)begin
-				ball_X_location = ball_X_location + 5;
-				b_velocity_X = -b_velocity_X;
+			else if (ball_X_location-1 <= 0)begin
+				score_player = score_player + 1;
+				ball_X_location = 320;
+				ball_Y_location = 240;
+				player_2_paddle_Y_location = 240;
 			end
 			// Y
-			else if(ball_Y_location-1 <= 5)begin
+			else if(ball_Y_location-1 <= 4)begin
 				ball_Y_location = ball_Y_location + 5;
 				b_velocity_Y = -b_velocity_Y; 
 			end
-			else if(ball_Y_location+1 >= 470)begin
+			else if(ball_Y_location+1 >= 476)begin
 				ball_Y_location = ball_Y_location - 5;
 				b_velocity_Y = -b_velocity_Y; 
 			end
@@ -138,7 +144,6 @@ always @(posedge pixel_clk)
 				ball_Y_location = ball_Y_location + b_velocity_Y;
 			end
 		end
-		
 		
 		if(player_1_paddle) pixel_color <= 12'b0000_0000_1111;
 		else if(player_2_paddle) pixel_color <= 12'b1111_0000_0000;
